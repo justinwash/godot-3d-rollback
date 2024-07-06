@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Godot Determinism Testbed"
+config/name="3d Rollback"
 run/main_scene="res://RollbackTest.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 
@@ -32,6 +32,10 @@ run/main_run_args="server"
 
 enabled=PackedStringArray("res://addons/godot-rollback-netcode/plugin.cfg")
 
+[godots]
+
+version_hint=""
+
 [input]
 
 sync_debug={
@@ -43,4 +47,3 @@ sync_debug={
 [physics]
 
 2d/physics_engine="Rapier2D"
-3d/physics_engine="Rapier3D"

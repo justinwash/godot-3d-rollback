@@ -1,6 +1,6 @@
 extends Node3D
 
-const DummyNetworkAdaptor = preload("res://addons/godot-rollback-netcode/DummyNetworkAdaptor.gd")
+const DummyNetworkAdaptor = preload ("res://addons/godot-rollback-netcode/DummyNetworkAdaptor.gd")
 
 const LOG_FILE_DIRECTORY = 'user://detailed_logs'
 
@@ -19,7 +19,6 @@ func _ready() -> void:
   SyncManager.connect("sync_lost", _on_SyncManager_sync_lost)
   SyncManager.connect("sync_regained", _on_SyncManager_sync_regained)
   SyncManager.connect("sync_error", _on_SyncManager_sync_error)
-
 
   if OS.get_cmdline_args().has("server"):
     IS_SERVER = true
@@ -41,14 +40,14 @@ func _on_network_peer_connected(peer_id: int):
   
   #$ServerPlayer.set_network_master(1)
   #if get_tree().is_network_server():
-    #$ClientPlayer.set_network_master(peer_id)
+  #$ClientPlayer.set_network_master(peer_id)
   #else:
-    #$ClientPlayer.set_network_master(get_tree().get_network_unique_id())
+  #$ClientPlayer.set_network_master(get_tree().get_network_unique_id())
   
   if multiplayer.is_server():
     print("Starting match...")
-    rpc("setup_match", {})
-    
+    rpc ("setup_match", {})
+  
     # Give a little time to get ping data.
     await get_tree().create_timer(2.0).timeout
     SyncManager.start()
@@ -73,18 +72,18 @@ func _on_SyncManager_sync_started() -> void:
     var dir = DirAccess.open("user://")
     if not dir.dir_exists(LOG_FILE_DIRECTORY):
       dir.make_dir(LOG_FILE_DIRECTORY)
-    
+  
     var datetime = Time.get_datetime_dict_from_system()
     var log_file_name = "%04d%02d%02d-%02d%02d%02d-peer-%d.log" % [
-      datetime['year'],
-      datetime['month'],
-      datetime['day'],
-      datetime['hour'],
-      datetime['minute'],
-      datetime['second'],
-      SyncManager.network_adaptor.get_unique_id(),
+    datetime['year'],
+    datetime['month'],
+    datetime['day'],
+    datetime['hour'],
+    datetime['minute'],
+    datetime['second'],
+    SyncManager.network_adaptor.get_unique_id(),
     ]
-    
+  
     SyncManager.start_logging(LOG_FILE_DIRECTORY + '/' + log_file_name)
 
 func _on_SyncManager_sync_stopped() -> void:
@@ -107,7 +106,7 @@ func _on_SyncManager_sync_error(msg: String) -> void:
   var peer = multiplayer.network_peer
   if peer:
     peer.close_connection()
-  SyncManager.clear_peers()
+    SyncManager.clear_peers()
 
 func setup_match_for_replay(my_peer_id: int, peer_ids: Array, match_info: Dictionary) -> void:
   #main_menu.visible = false
