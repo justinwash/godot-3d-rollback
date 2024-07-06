@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7s34ob62tjh0"]
+[gd_scene load_steps=3 format=3 uid="uid://c7s34ob62tjh0"]
 
 [ext_resource type="Script" path="res://rollback_test.gd" id="1_6d65i"]
+[ext_resource type="PackedScene" uid="uid://cm5mor67t0h7c" path="res://World.tscn" id="2_e4fhu"]
 
 [node name="RollbackTest" type="Node3D"]
 script = ExtResource("1_6d65i")
+
+[node name="World" parent="." instance=ExtResource("2_e4fhu")]

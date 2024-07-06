@@ -46,7 +46,7 @@ shadow_enabled = true
 environment = SubResource("Environment_sqk2i")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.931843, 0.362861, 0, -0.362861, 0.931843, 0, 2.41449, 6.46443)
+transform = Transform3D(1, 0, 0, 0, 0.625569, 0.780169, 0, -0.780169, 0.625569, 0, 7.41449, 6.46443)
 current = true
 
 [node name="Floor" type="StaticBody3D" parent="."]
