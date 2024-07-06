@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=3 uid="uid://cm5mor67t0h7c"]
+
+[ext_resource type="Texture2D" uid="uid://by1xcj2qb8yb1" path="res://addons/kenney_prototype_textures/orange/texture_01.png" id="1_vpnfr"]
+[ext_resource type="Script" path="res://world.gd" id="1_w3xul"]
+[ext_resource type="Script" path="res://character.gd" id="3_g5uvf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hdxfk"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_1wx8g"]
+sky_material = SubResource("ProceduralSkyMaterial_hdxfk")
+
+[sub_resource type="Environment" id="Environment_sqk2i"]
+background_mode = 2
+sky = SubResource("Sky_1wx8g")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_usobr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wi7rp"]
+albedo_texture = ExtResource("1_vpnfr")
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.86607
+
+[sub_resource type="BoxMesh" id="BoxMesh_5uv2i"]
+material = SubResource("StandardMaterial3D_wi7rp")
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_voi8u"]
+size = Vector3(19.9385, 1, 19.8739)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vn27f"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wn4oj"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_w3xul")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sqk2i")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.931843, 0.362861, 0, -0.362861, 0.931843, 0, 2.41449, 6.46443)
+current = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_usobr")
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_5uv2i")
+skeleton = NodePath("../..")
+
+[node name="FloorCollider" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0521622, 0, 0.0740433)
+shape = SubResource("BoxShape3D_voi8u")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94029, 0)
+script = ExtResource("3_g5uvf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_vn27f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_wn4oj")

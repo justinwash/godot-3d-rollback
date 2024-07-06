@@ -1,6 +1,0 @@
-[submodule "addons/gdrollback"]
-	path = addons/gdrollback
-	url = https://www.github.com/justinwash/gdrollback
-[submodule "addons/gdrapier3d"]
-	path = addons/gdrapier3d
-	url = https://www.github.com/justinwash/gdrapier3d

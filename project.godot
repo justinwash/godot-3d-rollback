@@ -10,6 +10,37 @@ config_version=5
 
 [application]
 
-config/name="Determinism Rollback Testbed"
-config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/name="Godot Determinism Testbed"
+run/main_scene="res://RollbackTest.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+
+[autoload]
+
+SyncManager="*res://addons/godot-rollback-netcode/SyncManager.gd"
+SyncReplay="*res://addons/godot-rollback-netcode/SyncReplay.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
+[editor]
+
+run/main_run_args="server"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-rollback-netcode/plugin.cfg")
+
+[input]
+
+sync_debug={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194342,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+
+[physics]
+
+2d/physics_engine="Rapier2D"
+3d/physics_engine="Rapier3D"

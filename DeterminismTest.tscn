@@ -1,0 +1,91 @@
+[gd_scene load_steps=14 format=3 uid="uid://b4kdnaou4p0kp"]
+
+[ext_resource type="Script" path="res://determinism_test.gd" id="1_8pcw3"]
+[ext_resource type="Texture2D" uid="uid://by1xcj2qb8yb1" path="res://addons/kenney_prototype_textures/orange/texture_01.png" id="2_wmou0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hdxfk"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_1wx8g"]
+sky_material = SubResource("ProceduralSkyMaterial_hdxfk")
+
+[sub_resource type="Environment" id="Environment_sqk2i"]
+background_mode = 2
+sky = SubResource("Sky_1wx8g")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_usobr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wi7rp"]
+albedo_texture = ExtResource("2_wmou0")
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.86607
+
+[sub_resource type="BoxMesh" id="BoxMesh_5uv2i"]
+material = SubResource("StandardMaterial3D_wi7rp")
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_voi8u"]
+size = Vector3(19.9385, 1, 19.8739)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xppn5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bc7gp"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ubmk4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oopv7"]
+
+[node name="DeterminismTest" type="Node3D"]
+script = ExtResource("1_8pcw3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sqk2i")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.931843, 0.362861, 0, -0.362861, 0.931843, 0, 2.41449, 6.46443)
+current = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_usobr")
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_5uv2i")
+skeleton = NodePath("../..")
+
+[node name="FloorCollider" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0521622, 0, 0.0740433)
+shape = SubResource("BoxShape3D_voi8u")
+
+[node name="Block1" type="RigidBody3D" parent="."]
+transform = Transform3D(0.918647, 0.395081, 0, -0.363322, 0.844802, -0.392819, -0.155195, 0.360862, 0.919616, 0, 2.32526, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Block1"]
+mesh = SubResource("BoxMesh_xppn5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block1"]
+shape = SubResource("BoxShape3D_bc7gp")
+
+[node name="Ball" type="RigidBody3D" parent="."]
+transform = Transform3D(0.918647, 0.395081, 0, -0.363322, 0.844802, -0.392819, -0.155195, 0.360862, 0.919616, -0.90045, 5.47762, -0.304101)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball"]
+mesh = SubResource("SphereMesh_ubmk4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
+shape = SubResource("SphereShape3D_oopv7")
+
+[node name="Block2" type="RigidBody3D" parent="."]
+transform = Transform3D(0.918647, 0.395081, 0, -0.363322, 0.844802, -0.392819, -0.155195, 0.360862, 0.919616, -1.31601, 3.56363, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Block2"]
+mesh = SubResource("BoxMesh_xppn5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block2"]
+shape = SubResource("BoxShape3D_bc7gp")
