@@ -1,2 +1,14 @@
-.godot
-.vscode
+# Godot
+*.import
+*.pck
+*.zip
+.mono/
+.godot/
+*.autosave
+
+# Rust
+/target/
+**/*.rs.bk
+
+# VSCode
+.vscode/
