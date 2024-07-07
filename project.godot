@@ -11,18 +11,13 @@ config_version=5
 [application]
 
 config/name="3d Rollback"
-run/main_scene="res://RollbackTest.tscn"
+run/main_scene="res://World.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 
 [autoload]
 
 SyncManager="*res://addons/godot-rollback-netcode/SyncManager.gd"
 SyncReplay="*res://addons/godot-rollback-netcode/SyncReplay.gd"
-
-[display]
-
-window/size/viewport_width=1920
-window/size/viewport_height=1080
 
 [editor]
 
